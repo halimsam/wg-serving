@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '*'
+spec:
+  template:
+    metadata:
+      annotations:
+        gke-gcsfuse/volumes: "true"
+        gke-gcsfuse/cpu-limit: "0"
+        # Setting arbitrary mem req/limit
+        gke-gcsfuse/memory-request: "4Gi"
+        gke-gcsfuse/memory-limit: "6Gi"
+        gke-gcsfuse/ephemeral-storage-limit: "0"
+    spec:
+      containers:
+      - name: inference-server
+      volumes:
+      - name: gke-gcsfuse-cache
+        emptyDir:
+          medium: Memory
+        

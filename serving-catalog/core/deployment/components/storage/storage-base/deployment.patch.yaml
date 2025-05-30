@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '*'
+spec:
+  template:
+    spec:
+      containers:
+      - name: inference-server
+        env:
+          - name: VLLM_CACHE_ROOT
+            value: /data/model
+          - name: VLLM_USE_V1
+            value: "1"
+        args:
+        - --model=/data/model
+        volumeMounts:
+        - name: volume-name
+          mountPath: /data/model
+      volumes:
+      - name: volume-name
+        persistentVolumeClaim:
+          claimName: pvc-name
+        
