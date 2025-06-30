@@ -10,8 +10,8 @@ spec:
         env:
         - name: MODEL_PATH
           value: path/to/model
-        args:
-        - --model=/data/$(MODEL_PATH)
+        # args:
+        # - --model=/data/$(MODEL_PATH)
         volumeMounts:
         - name: model-data
           mountPath: /data
